@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{aea2cef6-d6df-4cb3-93c8-91c042986cad}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{93a60356-5f3e-4f04-82e6-6ac039aee57a}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{c9defba4-a99d-48b0-a5f6-ecbe205eeb3b}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PMB100Terminal.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="can_master.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="var.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="CanHW.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="TerminaleLed.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="FramSpi.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="PLC.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="LedSeriali.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="LedNet.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PMB100Terminal-Debug.vgdbsettings" />
+    <None Include="PMB100Terminal-Release.vgdbsettings" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Ptype.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="candef.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Var.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Def.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminaleLed.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="PLC.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServizioDeviceFinder.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="LedSeriali.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="LedNet.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
