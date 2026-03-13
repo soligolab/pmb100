@@ -33,19 +33,14 @@ static void transfer(int fd)
 		0xFF,
 	}; 
 	uint8_t rx[ARRAY_SIZE(tx)] = { 0, };
-	struct spi_ioc_transfer tr = {
-		.tx_buf = (unsigned long)tx,
-		.rx_buf = (unsigned long)rx,
-		.len = ARRAY_SIZE(tx),
-		.speed_hz = speed,
-		.delay_usecs = delay,
-		.bits_per_word = bits,
-		.cs_change = 0,
-		.tx_nbits = 0,
-		.rx_nbits = 0,
-		.word_delay_usecs = 0,
-		.pad = 0,
-	};
+	struct spi_ioc_transfer tr;
+	memset(&tr, 0, sizeof(tr));
+	tr.tx_buf = (unsigned long)tx;
+	tr.rx_buf = (unsigned long)rx;
+	tr.len = ARRAY_SIZE(tx);
+	tr.speed_hz = speed;
+	tr.delay_usecs = delay;
+	tr.bits_per_word = bits;
 
 	ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
 	if (ret < 1)
