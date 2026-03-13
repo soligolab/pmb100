@@ -1,9 +1,9 @@
 ﻿
 #include "stdint.h"
 #include "candef.h"
-#include "Def.h"
-#include "Ptype.h"
-#include "Var.h"
+#include "def.h"
+#include "ptype.h"
+#include "var.h"
 
 
 #define	TIMER_STOP							0xFFF0

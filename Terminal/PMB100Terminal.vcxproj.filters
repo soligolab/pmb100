@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PMB100Terminal.cpp">
+    <ClCompile Include="pmb100_terminal.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="Util.cpp">
+    <ClCompile Include="util.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="can_master.cpp">
@@ -30,22 +30,22 @@
     <ClCompile Include="timer.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="CanHW.cpp">
+    <ClCompile Include="can_hw.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="TerminaleLed.cpp">
+    <ClCompile Include="terminale_led.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="FramSpi.cpp">
+    <ClCompile Include="fram_spi.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="PLC.cpp">
+    <ClCompile Include="plc.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="LedSeriali.cpp">
+    <ClCompile Include="led_seriali.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="LedNet.cpp">
+    <ClCompile Include="led_net.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,34 +54,34 @@
     <None Include="PMB100Terminal-Release.vgdbsettings" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ptype.h">
+    <ClInclude Include="ptype.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="candef.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="Var.h">
+    <ClInclude Include="var.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="Def.h">
+    <ClInclude Include="def.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="TerminaleLed.h">
+    <ClInclude Include="terminale_led.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="PLC.h">
+    <ClInclude Include="plc.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="ServizioDeviceFinder.h">
+    <ClInclude Include="servizio_device_finder.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="LedSeriali.h">
+    <ClInclude Include="led_seriali.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="LedNet.h">
+    <ClInclude Include="led_net.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="Util.h">
+    <ClInclude Include="util.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

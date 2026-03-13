@@ -73,16 +73,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CanHW.cpp" />
+    <ClCompile Include="can_hw.cpp" />
     <ClCompile Include="can_master.cpp" />
-    <ClCompile Include="FramSpi.cpp" />
-    <ClCompile Include="LedNet.cpp" />
-    <ClCompile Include="LedSeriali.cpp" />
-    <ClCompile Include="PMB100Terminal.cpp" />
-    <ClCompile Include="PLC.cpp" />
-    <ClCompile Include="TerminaleLed.cpp" />
+    <ClCompile Include="fram_spi.cpp" />
+    <ClCompile Include="led_net.cpp" />
+    <ClCompile Include="led_seriali.cpp" />
+    <ClCompile Include="pmb100_terminal.cpp" />
+    <ClCompile Include="plc.cpp" />
+    <ClCompile Include="terminale_led.cpp" />
     <ClCompile Include="timer.cpp" />
-    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="util.cpp" />
     <ClCompile Include="var.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -91,15 +91,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="candef.h" />
-    <ClInclude Include="Def.h" />
-    <ClInclude Include="LedNet.h" />
-    <ClInclude Include="LedSeriali.h" />
-    <ClInclude Include="PLC.h" />
-    <ClInclude Include="Ptype.h" />
-    <ClInclude Include="ServizioDeviceFinder.h" />
-    <ClInclude Include="TerminaleLed.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="Var.h" />
+    <ClInclude Include="def.h" />
+    <ClInclude Include="led_net.h" />
+    <ClInclude Include="led_seriali.h" />
+    <ClInclude Include="plc.h" />
+    <ClInclude Include="ptype.h" />
+    <ClInclude Include="servizio_device_finder.h" />
+    <ClInclude Include="terminale_led.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="var.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

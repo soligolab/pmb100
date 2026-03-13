@@ -7,7 +7,7 @@
 #include <string.h>
 #include <termios.h>
 
-#include "TerminaleLed.h"
+#include "terminale_led.h"
 
 #define EVENT_SIZE  ( sizeof (struct inotify_event) )
 #define EVENT_BUF_LEN     ( 1024 * ( EVENT_SIZE + 16 ) )
@@ -63,7 +63,7 @@ void InizializzaledSERIALI(void)
 		/*creating the INOTIFY instance*/
 		
 		
-		//Accendi LED se porte gi‡ in uso
+		//Accendi LED se porte gi√† in uso
 		fdser = inotify_init();
 		wd = inotify_add_watch(fdser, "/dev/ttyS2", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);
 		wd = inotify_add_watch(fdser, "/dev/ttyS4", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);

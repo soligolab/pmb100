@@ -10,13 +10,13 @@
 #include <sys/reboot.h> 
 #include <sys/syscall.h>
 
-#include "TerminaleLed.h"
+#include "terminale_led.h"
 #include "candef.h"
-#include "PLC.h"
-#include "ServizioDeviceFinder.h"
-#include "LedSeriali.h"
-#include "LedNet.h"
-#include "Util.h"
+#include "plc.h"
+#include "servizio_device_finder.h"
+#include "led_seriali.h"
+#include "led_net.h"
+#include "util.h"
 #include <sys/stat.h>
 #include <arpa/inet.h>
 

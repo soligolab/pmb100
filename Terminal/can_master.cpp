@@ -1,9 +1,9 @@
 ﻿
 #include "stdint.h"
 #include "candef.h"
-#include "Def.h"
-#include "Ptype.h"
-#include "Var.h"
+#include "def.h"
+#include "ptype.h"
+#include "var.h"
 
 #include <linux/can.h>
 #include <linux/can/raw.h>
@@ -12,7 +12,7 @@
 
 #include <pthread.h>
 #include <stdio.h>
-#include <Util.h>
+#include <util.h>
 
 extern void dmesgDebug(const char *msg1, const char *msg2);
 
