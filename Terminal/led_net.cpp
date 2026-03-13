@@ -382,7 +382,6 @@ void GestioneledNET(void)
 						{
 							LedBLKsup &= ~LED_CAN1; //0x00002; //off led can1
 							LedTRMinf &= ~LED_E_CAN1; //0x00800; //off led e.can1
-							char str[2];
 							//sprintf(str, "%d", val);
 							//dmesgDebug("Set can1 pk=", str);
 							dmesgDebug("CAN1 line OK", "");

@@ -40,8 +40,14 @@ CXXFLAGS += -std=gnu++17 -Wall -Wextra -I. $(ARCH_FLAGS) $(addprefix -D,$(COMMON
 LDFLAGS += -pthread
 
 ifeq ($(KERNEL_API),6)
-	CXXFLAGS += -DPMB100_ENABLE_GPIOD=1
-	LDLIBS += -lgpiod
+CXXFLAGS += -DPMB100_ENABLE_GPIOD=1
+GPIOD_LIB_FOUND := $(shell sh -c 'sysroot="$$( $(CXX) -print-sysroot 2>/dev/null )"; \
+for p in "$$sysroot/usr/lib/libgpiod.so" "$$sysroot/usr/lib/libgpiod.a" "$$sysroot/usr/lib/arm-linux-gnueabihf/libgpiod.so" "$$sysroot/usr/lib/arm-linux-gnueabihf/libgpiod.a" "/usr/lib/libgpiod.so" "/usr/lib/libgpiod.a" "/usr/lib/arm-linux-gnueabihf/libgpiod.so" "/usr/lib/arm-linux-gnueabihf/libgpiod.a"; do [ -e "$$p" ] && { echo yes; exit 0; }; done; echo no')
+ifeq ($(GPIOD_LIB_FOUND),yes)
+LDLIBS += -lgpiod
+else
+$(warning libgpiod non trovata: build con fallback sysfs GPIO)
+endif
 endif
 
 .PHONY: all clean strip

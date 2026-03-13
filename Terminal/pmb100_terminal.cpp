@@ -50,8 +50,10 @@ bool CiclaSuWhile = true;
 
 extern bool StopRuntime;
 
+#ifdef UPS
 /* This is the critical section object (statically allocated). */
 static pthread_mutex_t cs_mutex =  PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
+#endif
 
 void ApplicoIP99(void)
 {
@@ -65,7 +67,6 @@ bool fls1prem = false;
 void GestionePulsanteS1_collaudo_RUNMMC(void)
 {	
 	//*************************************************** prepara PLC per collaudo o per spedizione
-	int ret;
 	if (Dip & BIT_PULSANTE ) 
 	{
 		TempoPressioneS1++;
@@ -242,7 +243,6 @@ void PreparaEmmcPerPPH()
 	
 void GestionePulsanteS1_collaudo_RUNSD(void)
 {	
-	int ret;
 	if (Dip & BIT_PULSANTE) 
 	{
 		TempoPressioneS1++;
@@ -273,7 +273,7 @@ void GestionePulsanteS1_collaudo_RUNSD(void)
 			//se EMMC non formattata SLC: fornatta e crea file "/data/emmcslc.ok" che serve per partenza automatica al riavvio dopo power off
 			//se EMMC è gia formattata procede subito con la copia 
 			//In fine copia se tutto ok , genera file sh.ok
-			int	ret = system("/opt/backup/uboot/copy2emmc.sh ext4 nopersistent");
+			system("/opt/backup/uboot/copy2emmc.sh ext4 nopersistent");
 			if (FileExist("/tmp/sh.ok") == true)
 			{
 				LedBLKinf &= ~(LED_INTERNO | LED_E_1 | LED_E_2 | LED_W_1 | LED_DISCO); //se ok stop lampeggio
@@ -295,8 +295,6 @@ void GestionePulsanteS1_collaudo_RUNSD(void)
 	
 void GestionePulsanteS1(void)
 {
-	int ret;
-	
 	if (Dip & BIT_PULSANTE ) 
 	{
 		TempoPressioneS1++;
@@ -325,9 +323,9 @@ void GestionePulsanteS1(void)
 				LedBLKinf |= LED_INTERNO;
 				remove("/tmp/sh.ok");
 				StopRuntimePLC();
-				if (TipoPlc == PLCCODESYS)  ret = system("/data/pmb100/createlog.sh");
-				if (TipoPlc == PLCLOGICLAB) ret = system("/data/pmb100/createlog.sh");
-				if (TipoPlc == CNV600)      ret = system("/data/pmb100/createlog.sh");
+				if (TipoPlc == PLCCODESYS)  system("/data/pmb100/createlog.sh");
+				if (TipoPlc == PLCLOGICLAB) system("/data/pmb100/createlog.sh");
+				if (TipoPlc == CNV600)      system("/data/pmb100/createlog.sh");
 				//tutto ok se presente file sh.ok
 				if (FileExist("/tmp/sh.ok") == true)
 				{
@@ -346,9 +344,9 @@ void GestionePulsanteS1(void)
 				LedBLKinf |= LED_INTERNO;
 				remove("/tmp/sh.ok");
 				StopRuntimePLC();
-				if (TipoPlc == PLCCODESYS)   ret = system("/data/pmb100/restore.sh");
-			    if (TipoPlc == PLCLOGICLAB)  ret = system("/data/pmb100/restore.sh");
-				if (TipoPlc == CNV600)		 ret = system("/data/pmb100/restore.sh");
+				if (TipoPlc == PLCCODESYS)   system("/data/pmb100/restore.sh");
+			    if (TipoPlc == PLCLOGICLAB)  system("/data/pmb100/restore.sh");
+				if (TipoPlc == CNV600)		 system("/data/pmb100/restore.sh");
 				//tutto ok se presente file sh.ok
 				if (FileExist("/tmp/sh.ok") == true)
 				{
@@ -380,7 +378,7 @@ void GestionePulsanteS1(void)
 				LedTRMinf |= LED_INTERNO  | LED_E_1 | LED_E_2 | LED_W_1 | LED_DISCO; //
 				LedBLKinf |=  LED_INTERNO | LED_E_1 | LED_E_2 | LED_W_1 | LED_DISCO; //
 				remove("/tmp/sh.ok");
-				int ret = system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
+				system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
 				//tutto ok se presente file sh.ok
 				if (FileExist("/tmp/sh.ok") == true)
 				{
@@ -890,8 +888,8 @@ void LeggiStatoUsuraMMC()
 		LifeTimeMMC_1to10 = GetValParFromString(buff, (char*)":", 2);
 		pclose(fp);
 		dmesgDebug("LeggiStatoUsuraMMC()", "");
-		char str[2];
-		sprintf(str, "%d", LifeTimeMMC_1to10);
+		char str[12];
+		snprintf(str, sizeof(str), "%d", LifeTimeMMC_1to10);
 		dmesgDebug("StatoUsuraMMC(0=nommc tra 1 e 9 good , 10=usurata) n=", str);
 		return;
 	}
@@ -922,10 +920,10 @@ void VerificaLicenze(void)
 	char buffdemo[256] {0};
 	char bufflice[256] {0};
 	char bufftool[256] {0};
-	char*  Demopresent;
-	char*  Licepresent;
-	char*  Toolpresent;
-	char*  Errpresent;
+	char*  Demopresent = NULL;
+	char*  Licepresent = NULL;
+	char*  Toolpresent = NULL;
+	char*  Errpresent = NULL;
 	
 	if (StopRuntime==true) return;
 	if (TimerRitVerLic > TEMPORITVERLIC) return;
@@ -1134,11 +1132,13 @@ void Gestione24VOFF()
 
 void LampeggioAllOn(int s)
 {	
+	(void)s;
 	blampallled = true;
 }
 
 void LampeggioAllOff(int s)
 {	
+	(void)s;
 	blampallled = false;
 }
 
@@ -1314,7 +1314,7 @@ void GestioneDeviceConTerminale()
 						//se EMMC non formattata SLC: fornatta e crea file "/data/emmcslc.ok" che serve per partenza automatica al riavvio dopo power off
 						//se EMMC è gia formattata procede subito con la copia 
 						//In fine copia se tutto ok , genera file sh.ok
-						int	ret = system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
+						system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
 						sync();
 						if (FileExist("/tmp/sh.ok") == true)
 						{	
@@ -1580,7 +1580,7 @@ void GestioneDeviceSenzaTerminale(void)
 				//se EMMC non formattata SLC: fornatta e crea file "/data/emmcslc.ok" che serve per partenza automatica al riavvio dopo power off
 				//se EMMC è gia formattata procede subito con la copia 
 				//In fine copia se tutto ok , genera file sh.ok
-				int	ret = system("/opt/backup/uboot/copy2emmc.sh ext4 nopersistent");
+				system("/opt/backup/uboot/copy2emmc.sh ext4 nopersistent");
 				sync();
 				if (FileExist("/tmp/sh.ok") == true)
 				{	
@@ -1668,7 +1668,7 @@ void GestioneDeviceSenzaTerminale(void)
 				//se EMMC non formattata SLC: fornatta e crea file "/data/emmcslc.ok" che serve per partenza automatica al riavvio dopo power off
 				//se EMMC è gia formattata procede subito con la copia 
 				//In fine copia se tutto ok , genera file sh.ok
-				int	ret = system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
+				system("/opt/backup/uboot/copy2emmc.sh ext4 persistent");
 				sync();
 				if (FileExist("/tmp/sh.ok") == true)
 				{	
@@ -1753,6 +1753,7 @@ void GestioneDeviceSenzaTerminale(void)
 
 int main(int argc, char *argv[])
 {
+	(void)argc;
 	//char strVer[] = "Ver. 1.8 *** 11/06/2025\n";
 	char strVer[] = "Ver. 1.9 *** 12/09/2025\n";
 
