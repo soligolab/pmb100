@@ -48,6 +48,7 @@ void GestioneledSER(void)
 
 void *th_ledser(void * arg) //task 10ms
 {
+	(void)arg;
 	while (true)
 	{
 		GestioneledSER();
@@ -57,7 +58,6 @@ void *th_ledser(void * arg) //task 10ms
 
 void InizializzaledSERIALI(void)
 {
-	int wd;
 	if (InitLedSer == false)
 	{
 		/*creating the INOTIFY instance*/
@@ -65,9 +65,10 @@ void InizializzaledSERIALI(void)
 		
 		//Accendi LED se porte già in uso
 		fdser = inotify_init();
-		wd = inotify_add_watch(fdser, "/dev/ttyS2", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);
-		wd = inotify_add_watch(fdser, "/dev/ttyS4", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);
+		inotify_add_watch(fdser, "/dev/ttyS2", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);
+		inotify_add_watch(fdser, "/dev/ttyS4", IN_OPEN | IN_CLOSE | IN_CLOSE_NOWRITE | IN_CLOSE_WRITE | IN_CREATE);
 		int status = pthread_create(&thledser, NULL, th_ledser, NULL);
-		InitLedSer = true;
+		if (status == 0)
+			InitLedSer = true;
 	}
 }

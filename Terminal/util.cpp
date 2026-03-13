@@ -157,7 +157,6 @@ int GetGrupParSubParFromFile(const char * filename,const char * gruppar,const ch
 {
 	char *token;
 	char* r;
-	bool nogroup=true;
 	static char buffer[1024] {0};
 	int fd = open(filename, O_RDONLY);
 	read(fd, &buffer, sizeof(buffer));

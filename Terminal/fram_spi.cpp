@@ -40,16 +40,21 @@ static void transfer(int fd)
 		.speed_hz = speed,
 		.delay_usecs = delay,
 		.bits_per_word = bits,
+		.cs_change = 0,
+		.tx_nbits = 0,
+		.rx_nbits = 0,
+		.word_delay_usecs = 0,
+		.pad = 0,
 	};
 
 	ret = ioctl(fd, SPI_IOC_MESSAGE(1), &tr);
 	if (ret < 1)
 		printf("can't send spi message");
 
-	for (ret = 0; ret < ARRAY_SIZE(tx); ret++) {
-		if (!(ret % 6))
+	for (size_t i = 0; i < ARRAY_SIZE(tx); i++) {
+		if (!(i % 6))
 			puts("");
-		printf("%.2X ", rx[ret]);
+		printf("%.2X ", rx[i]);
 	}
 	printf(" = Deve essere FF 04 7F 27 03");
 	puts("");

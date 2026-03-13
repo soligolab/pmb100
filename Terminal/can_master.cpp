@@ -21,6 +21,7 @@ int RunTaskCan=1;
 bool PLE500INDEX;
 void *th_timer(void * arg) //task 10ms
 {
+	(void)arg;
 	while (RunTaskCan)
 	{
 		GestioneTimer();
@@ -31,6 +32,7 @@ void *th_timer(void * arg) //task 10ms
 
 void *th_can(void * arg) //task 1ms
 {
+	(void)arg;
 	while (RunTaskCan)
 	{
 		RicezioneCanMsg();
@@ -89,8 +91,8 @@ int GestioneNumerazioneNodiCan(void)
 		}
 		else
 		{
-			char str[2];
-			sprintf(str, "%d", ArrayImpianto.NumeroNodiRilevati);
+			char str[4];
+			snprintf(str, sizeof(str), "%d", ArrayImpianto.NumeroNodiRilevati);
 			dmesgDebug("PLE500 End Index: PLE Presenti n=", str);
 			touch("/tmp/PLE500present");
 		}
@@ -104,8 +106,8 @@ int GestioneNumerazioneNodiCan(void)
 		}
 		else
 		{
-			char str[2];
-			sprintf(str, "%d", ArrayImpianto.NumeroNodiRilevati);
+			char str[4];
+			snprintf(str, sizeof(str), "%d", ArrayImpianto.NumeroNodiRilevati);
 			dmesgDebug("PLE500 End Index: PLE Presenti n=",str);
 			touch("/tmp/PLE500present");
 		}
@@ -445,5 +447,4 @@ void GestioneInterruptRxMasterCanOpen(void)
 		}
 	}
 }
-
 

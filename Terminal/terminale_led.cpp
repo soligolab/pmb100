@@ -417,8 +417,8 @@ bool RxFrameCode01_Status(int nbyterx)
 		if(Dip != OldDip)
 		{
 			OldDip = Dip;
-			char str[3]={0};
-			sprintf(str, "%d", Dip);
+			char str[12]={0};
+			snprintf(str, sizeof(str), "%d", Dip);
 			touchstr("/tmp/Dip", str);
 		}	
 
@@ -481,6 +481,7 @@ void TxFrameCode03_RxPar(int StartPar, int  NPar)
 
 bool RxFrameCode03_ParEth(int nbyterx, int StartPar, int  NPar, ETHX * eth)
 {	
+	(void)StartPar;
 	//verifica se risposta a codice 03
 	unsigned char b1, b2, b3, b4;
 	int LenRX = (NPar * 2) + 12;
@@ -530,6 +531,7 @@ bool RxFrameCode03_ParEth(int nbyterx, int StartPar, int  NPar, ETHX * eth)
 
 bool RxFrameCode03_ParWlan0AP(int nbyterx, int StartPar, int  NPar, WLANX * eth)
 {	
+	(void)StartPar;
 	//verifica se risposta a codice 03
 	unsigned char b1;
 	int LenRX = (NPar * 2) + 12;
@@ -568,6 +570,7 @@ bool RxFrameCode03_ParWlan0AP(int nbyterx, int StartPar, int  NPar, WLANX * eth)
 
 bool RxFrameCode03_ParWlan0(int nbyterx, int StartPar, int  NPar, WLANX * eth)
 {	
+	(void)StartPar;
 	//verifica se risposta a codice 03
 	unsigned char b1;
 	int LenRX = (NPar * 2) + 12;
@@ -1036,6 +1039,7 @@ void ComunicazioneConTRM(void)
 bool Fstopthled=true;
 void *th_led(void * arg) //task 10ms
 {
+	(void)arg;
 	while (Fstopthled)
 	{
 		ComunicazioneConTRM();
@@ -1048,7 +1052,6 @@ void InizializzaTerminaleLedUart(bool stato)
 {	
 	pthread_attr_t tattr;
 	pthread_t thled;
-	int ret;
 	int newprio = 18;
 	sched_param param;
 	
@@ -1083,15 +1086,15 @@ void InizializzaTerminaleLedUart(bool stato)
 	LedBLKinf = 0x00;	
 	
 	/* initialized with default attributes */
-	ret = pthread_attr_init(&tattr);
+	pthread_attr_init(&tattr);
 	/* safe to get existing scheduling param */
-	ret = pthread_attr_getschedparam(&tattr, &param);
+	pthread_attr_getschedparam(&tattr, &param);
 	/* set the priority; others are unchanged */
 	param.sched_priority = newprio;
 	/* setting the new scheduling param */
-	ret = pthread_attr_setschedparam(&tattr, &param);
+	pthread_attr_setschedparam(&tattr, &param);
 	/* with new priority specified */
-	int status = pthread_create(&thled, &tattr, th_led, NULL);
+	pthread_create(&thled, &tattr, th_led, NULL);
 }
 
 void InizializzaTerminaleLedSpi(void)

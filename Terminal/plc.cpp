@@ -55,7 +55,7 @@ pid_t Get_tmp_pid(char * file)
 	char pid[lenbuf];
 	int f = open(file, O_RDONLY);
 	if (f == -1) return 0;
-	int n = read(f, pid, lenbuf);
+	read(f, pid, lenbuf);
 	close(f);
 	return atoi(pid);
 }
@@ -140,7 +140,6 @@ bool floneshot = false;
 int stopdipold=-1;
 void GestionePLC(void)
 {
-	int tmppid;
 	char state;
 	
 	//gestione stato runtime e stato logica all'avvio
